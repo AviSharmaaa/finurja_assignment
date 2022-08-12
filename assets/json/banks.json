@@ -1,0 +1,26 @@
+[
+  {
+    "fipId": "AXIS",
+    "fipName": "AXIS Bank",
+    "balance": 245678,
+    "accountType": "SAVINGS",
+    "accountNumber": "XXXX123",
+    "accountId": "lrn_001"
+  },
+  {
+    "fipId": "KOTAK",
+    "fipName": "KOTAK Mahindra Bank",
+    "balance": 1000000,
+    "accountType": "SAVINGS",
+    "accountNumber": "XXXX124",
+    "accountId": "lrn_002"
+  },
+  {
+    "fipId": "HDFC",
+    "fipName": "HDFC Bank",
+    "balance": 500000,
+    "accountType": "SAVINGS",
+    "accountNumber": "XXXX125",
+    "accountId": "lrn_003"
+  }
+]
