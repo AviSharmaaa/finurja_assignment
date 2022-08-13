@@ -12,9 +12,9 @@ class CustomBottomSheet extends StatefulWidget {
 }
 
 class _CustomBottomSheetState extends State<CustomBottomSheet> {
-  AppState provider = AppState();
-  List<Banks> banks = [];
   Banks? activeBank;
+  List<Banks> banks = [];
+  AppState provider = AppState();
 
   @override
   void initState() {
@@ -26,6 +26,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -69,12 +70,13 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
                   decoration: TextDecoration.underline,
                   color: Colors.blue,
                   fontSize: 18,
+                  fontWeight: FontWeight.w500,
                 ),
               )
             ],
           ),
         ),
-        Divider(
+        const Divider(
           thickness: 1.5,
           indent: 20,
           endIndent: 20,
@@ -85,8 +87,19 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
             itemBuilder: (context, index) {
               Banks bank = banks[index];
               return RadioListTile(
+                visualDensity: const VisualDensity(
+                  horizontal: VisualDensity.maximumDensity,
+                  vertical: VisualDensity.maximumDensity,
+                ),
                 controlAffinity: ListTileControlAffinity.trailing,
-                title: Text(bank.fipId),
+                title: Text(
+                  bank.fipName,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.0,
+                  ),
+                ),
                 subtitle: Text(
                   "${bank.accountType} A/C  (${bank.accountNumber})",
                 ),
@@ -102,11 +115,20 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
           ),
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size(size.width * 0.9, 55),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
           onPressed: () {
             provider.setActiveBank = activeBank;
             Navigator.pop(context);
           },
-          child: const Text("APPLY"),
+          child: Text("Apply".toUpperCase()),
+        ),
+        const SizedBox(
+          height: 15,
         ),
       ],
     );

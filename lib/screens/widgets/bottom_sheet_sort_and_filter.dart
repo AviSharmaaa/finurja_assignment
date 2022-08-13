@@ -13,19 +13,14 @@ class BottomSheetSortAndFilter extends StatefulWidget {
 }
 
 class _BottomSheetSortAndFilterState extends State<BottomSheetSortAndFilter> {
-  final double horizontalPadding = 25.0;
-
-  final double verticalPadding = 20.0;
-
-  String radioVal = "assend";
-  bool checkVal = true;
-
-  AppState provider = AppState();
   List<CheckBoxState> filterList = [];
-  List<RadioButton> sortList = [];
   List<String> filters = [];
-  List<String> sortOptions = [];
+  AppState provider = AppState();
   String? selectedSortOption;
+  List<RadioButton> sortList = [];
+  List<String> sortOptions = [];
+  final double verticalPadding = 15.0;
+  final double horizontalPadding = 25.0;
 
   @override
   void initState() {
@@ -36,109 +31,6 @@ class _BottomSheetSortAndFilterState extends State<BottomSheetSortAndFilter> {
     filters = provider.getFilters;
     sortOptions = provider.getSortOptions;
     selectedSortOption = provider.getSelectedSortOption ?? sortOptions.first;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: horizontalPadding,
-            vertical: verticalPadding,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                "Sort & Filter",
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const Icon(
-                  Icons.close_outlined,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const Divider(
-          thickness: 2,
-          indent: 20,
-          endIndent: 20,
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: horizontalPadding,
-            vertical: verticalPadding,
-          ),
-          child: Column(
-            children: [
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text("Time se sort karein"),
-              ),
-              SizedBox(
-                height: 100,
-                child: ListView(
-                  children: [
-                    ...sortList.map((e) => (singleRadioButton(e))).toList(),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text("Filter By"),
-              ),
-              SizedBox(
-                height: 100,
-                child: ListView(
-                  children: [
-                    ...filterList.map((e) => (singleCheckBox(e))).toList(),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            OutlinedButton(
-              onPressed: () {
-                provider.setFilters = <String>[];
-                for (var e in filterList) {
-                  e.value = false;
-                }
-                provider.setFiltersList = filterList;
-                provider.setSelectedSortOption = sortOptions.first;
-                Navigator.pop(context);
-              },
-              child: const Text("Reset"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                provider.setFilters = filters;
-                provider.setSelectedSortOption = selectedSortOption;
-                Navigator.pop(context);
-              },
-              child: const Text("Apply"),
-            ),
-          ],
-        )
-      ],
-    );
   }
 
   RadioListTile<String> singleRadioButton(RadioButton radio) {
@@ -169,6 +61,136 @@ class _BottomSheetSortAndFilterState extends State<BottomSheetSortAndFilter> {
           filters.remove(checkbox.title);
         }
       },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: horizontalPadding,
+            vertical: verticalPadding,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "Sort & Filter",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: const Icon(
+                  Icons.close_outlined,
+                  size: 30,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const Divider(
+          thickness: 2,
+          indent: 20,
+          endIndent: 20,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: horizontalPadding,
+            vertical: verticalPadding,
+          ),
+          child: Column(
+            children: [
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Time se sort karein",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 100,
+                child: ListView(
+                  children: [
+                    ...sortList.map((e) => (singleRadioButton(e))).toList(),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Filter By",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 100,
+                child: ListView(
+                  children: [
+                    ...filterList.map((e) => (singleCheckBox(e))).toList(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                minimumSize: Size(
+                  size.width * 0.45,
+                  50,
+                ),
+              ),
+              onPressed: () {
+                provider.setFilters = <String>[];
+                for (var e in filterList) {
+                  e.value = false;
+                }
+                provider.setFiltersList = filterList;
+                provider.setSelectedSortOption = sortOptions.first;
+                Navigator.pop(context);
+              },
+              child: const Text("Reset"),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(
+                  size.width * 0.45,
+                  50,
+                ),
+              ),
+              onPressed: () {
+                provider.setFilters = filters;
+                provider.setSelectedSortOption = selectedSortOption;
+                Navigator.pop(context);
+              },
+              child: const Text("Apply"),
+            ),
+          ],
+        )
+      ],
     );
   }
 }

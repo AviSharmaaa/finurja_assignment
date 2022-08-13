@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   final Color kCanvasColor = const Color(0xFFFFFFFF);
-  final Color kTextColor = const Color(0xFF000000);
   final Color kPrimaryColor = const Color(0xFF322282);
-  final Color kSecondaryTextColor = Colors.grey.shade700;
-  final Color kWhiteText = const Color(0xFFFFFFFF);
+  final Color kTextColor = const Color(0xFF000000);
 
   ThemeData buildTheme() {
     return ThemeData(

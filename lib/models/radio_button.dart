@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class RadioButton {
   final String title;
   String value;

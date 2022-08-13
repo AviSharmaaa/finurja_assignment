@@ -1,8 +1,9 @@
-import 'package:finurja_assignment/screens/home_screen.dart';
-import 'package:finurja_assignment/state/app_state.dart';
-import 'package:finurja_assignment/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'screens/home_screen.dart';
+import 'state/app_state.dart';
+import 'utils/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => AppState(),
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Finurja Assignment',
         theme: AppTheme().buildTheme(),
         debugShowCheckedModeBanner: false,
         home: const HomeScreen(),

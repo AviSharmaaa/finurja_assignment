@@ -1,35 +1,31 @@
 import 'dart:convert';
-
-import 'package:finurja_assignment/models/radio_button.dart';
-import 'package:finurja_assignment/models/transactions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import '../models/banks.dart';
 import '../models/check_box.dart';
+import '../models/radio_button.dart';
+import '../models/transactions.dart';
 
 class AppState extends ChangeNotifier {
-  List<Banks> _banksList = [];
-  List<Transactions> _transactionsList = [];
+  Banks? _activeBank;
   List<Transactions> _activeTransactions = [];
-  List<String> _filters = [];
-  int _totalActiveTransactions = 0;
-  int _totalTransactionsDisplayed = 0;
-
+  List<Banks> _banksList = [];
   List<CheckBoxState> _filterList = [
     CheckBoxState(title: "Credit", value: false),
     CheckBoxState(title: "Debit", value: false),
   ];
 
-  final List<String> _sortOptions = ["desc", "aesc"];
-
+  List<String> _filters = [];
+  String? _selectedSortOption;
   List<RadioButton> _sortList = [
     RadioButton(title: "Naye se Purane", value: "desc"),
     RadioButton(title: "Purane se naye", value: "aesc"),
   ];
 
-  Banks? _activeBank;
-  String? _selectedSortOption;
+  final List<String> _sortOptions = ["desc", "aesc"];
+  int _totalActiveTransactions = 0;
+  int _totalTransactionsDisplayed = 0;
+  List<Transactions> _transactionsList = [];
 
   void readBanks() async {
     List<Banks> banks = [];
@@ -94,15 +90,25 @@ class AppState extends ChangeNotifier {
   }
 
   Banks? get getActiveBank => _activeBank;
+
   List<Banks> get getBanksList => _banksList;
+
   List<Transactions> get getTransactionsList => _transactionsList;
+
   List<Transactions> get getActiveTransactions => _activeTransactions;
+
   List<CheckBoxState> get getFilterList => _filterList;
+
   List<String> get getFilters => _filters;
+
   List<RadioButton> get getSortList => _sortList;
+
   List<String> get getSortOptions => _sortOptions;
+
   String? get getSelectedSortOption => _selectedSortOption;
+
   int get getTotalActiveTransactions => _totalActiveTransactions;
+
   int get getTotalTransactionsDisplayed => _totalTransactionsDisplayed;
 
   set setTotalActiveTransactions(value) {

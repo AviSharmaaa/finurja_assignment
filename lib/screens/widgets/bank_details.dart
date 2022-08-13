@@ -11,6 +11,8 @@ class BankDetails extends StatelessWidget {
     required this.bank,
   }) : super(key: key);
 
+  final Banks bank;
+
   String convertBalanceToInrFormat(balance) {
     var format = NumberFormat.currency(
       locale: "en_IN",
@@ -19,8 +21,6 @@ class BankDetails extends StatelessWidget {
     );
     return format.format(balance);
   }
-
-  final Banks bank;
 
   @override
   Widget build(BuildContext context) {
@@ -51,11 +51,11 @@ class BankDetails extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       "assets/${bank.fipId}.svg",
-                      height: 20,
-                      width: 20,
+                      height: 30,
+                      width: 30,
                     ),
                     const SizedBox(
-                      width: 5,
+                      width: 8,
                     ),
                     Text(
                       bank.fipId,
@@ -76,14 +76,14 @@ class BankDetails extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              height: 5,
+              height: 10,
             ),
             Align(
               alignment: Alignment.topLeft,
               child: Text(
                 "${bank.accountType} A/C",
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 16,
                 ),
               ),
             ),
@@ -97,12 +97,13 @@ class BankDetails extends StatelessWidget {
                   context,
                   const CustomBottomSheet(),
                 ),
-                child: const Text(
+                child: Text(
                   "Account Badlein",
                   style: TextStyle(
                     decoration: TextDecoration.underline,
-                    color: Colors.blue,
-                    fontSize: 20,
+                    color: Colors.blue.shade700,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
